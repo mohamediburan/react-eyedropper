@@ -1,0 +1,56 @@
+import { useEffect, useMemo, useState, useCallback, FC } from "react";
+
+import "eyedropper-polyfill";
+
+import { Color, EyeDropperProps } from "./types";
+
+export const EyeDropper: FC<EyeDropperProps> = (props) => {
+  const { on, onPick, onPickCancel, children } = props;
+
+  const [pickingFromDocument, setPickingFromDocument] = useState(false);
+  const eyeDropper = useMemo(() => new window.EyeDropper(), []);
+  const [abortController, abortSignal] = useMemo((): [
+    AbortController,
+    AbortSignal
+  ] => {
+    const controller = new window.AbortController();
+    const signal = controller.signal;
+    return [controller, signal];
+  }, []);
+
+  const cancelPickColor = useCallback(() => {
+    abortController.abort();
+    setPickingFromDocument(false);
+    onPickCancel();
+  }, [abortController, setPickingFromDocument, onPickCancel]);
+
+  const exitPickingByEsc = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.code === "Escape" && pickingFromDocument) {
+        cancelPickColor();
+      }
+    },
+    [pickingFromDocument, cancelPickColor]
+  );
+
+  useEffect(() => {
+    if (pickingFromDocument) {
+      document.addEventListener("keydown", exitPickingByEsc);
+    }
+    return () => document.removeEventListener("keydown", exitPickingByEsc);
+  }, [pickingFromDocument, exitPickingByEsc]);
+
+  const onPickStart = useCallback(async () => {
+    const { sRGBHex } = await eyeDropper.open({ signal: abortSignal });
+    const color: Color = {
+      hex: sRGBHex,
+    };
+    onPick(color);
+  }, [eyeDropper, abortSignal, onPick]);
+
+  useEffect(() => {
+    on && onPickStart();
+  }, [on, onPickStart]);
+
+  return <>{children}</>;
+};
