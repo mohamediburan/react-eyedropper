@@ -1,10 +1,10 @@
-import { useEffect, useMemo, useState, useCallback, FC } from "react";
+import { useEffect, useMemo, useState, useCallback, FC, PropsWithChildren } from "react";
 
 import "eyedropper-polyfill";
 
 import { Color, EyeDropperProps } from "./types";
 
-export const EyeDropper: FC<EyeDropperProps> = (props) => {
+export const EyeDropper: FC<PropsWithChildren<EyeDropperProps>> = (props) => {
   const { on, onPick, onPickCancel, children } = props;
 
   const [pickingFromDocument, setPickingFromDocument] = useState(false);
