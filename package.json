@@ -1,6 +1,6 @@
 {
   "name": "ya-react-eyedropper",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "files": [
     "dist"
@@ -35,7 +35,8 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "typescript": "^5.2.2",
-    "vite": "^5.1.6"
+    "vite": "^5.1.6",
+    "vite-plugin-dts": "^3.7.3"
   },
   "peerDependencies": {
     "react": ">=16.12.0"
