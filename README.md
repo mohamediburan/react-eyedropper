@@ -7,6 +7,8 @@ Installation:
 npm install ya-react-eyedropper --save
 ```
 
+### [Demo](https://stackblitz.com/edit/vitejs-vite-2awgpp?file=src%2FApp.tsx)
+
 ### Props:  
 
 *on: boolean*  
@@ -18,7 +20,7 @@ npm install ya-react-eyedropper --save
 *onPickCancel: () => unknown*  
 -- called when eyedropper gets cancelled by clicking esc. similar to native eyedropper of chrome.
 
-***Note:*** Cancel the eyedropper by clicking on escape button in keyboard.
+***Note:*** Cancel the eyedropper by clicking on keyboard escape button.
 
 ### Usage  
 
