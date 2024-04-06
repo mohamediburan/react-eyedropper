@@ -1,2 +1,2 @@
-export { EyeDropper } from "./eyeDropper";
-export type { EyeDropperProps, Color } from "./types";
+export { useEyeDropper } from "./useEyeDropper";
+export type { EyeDropperHookProps, Color } from "./types";

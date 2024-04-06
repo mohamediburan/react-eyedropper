@@ -2,11 +2,10 @@ export type Color = {
   hex: string;
 };
 
-export type EyeDropperProps = {
-  on: boolean;
-  onPick: (color: Color) => unknown;
-  onPickCancel: () => unknown;
-}
+export type EyeDropperHookProps = {
+  start: () => Promise<Color>;
+  cancel?: () => unknown;
+};
 
 interface ColorSelectionOptions {
   signal?: AbortSignal;

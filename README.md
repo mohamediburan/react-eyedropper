@@ -1,8 +1,8 @@
 ***yet Another react-eyedropper*** (ya-react-eyedropper)
 
-A fully controlled simple react component around [eyedropper-polyfill](https://github.com/iam-medvedev/eyedropper-polyfill).
+A fully controlled react component around [eyedropper-polyfill](https://github.com/iam-medvedev/eyedropper-polyfill) to provide chrome like eyedropper experience across all browsers.
 
-Installation:
+### Installation:
 ```
 npm install ya-react-eyedropper --save
 ```
