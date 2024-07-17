@@ -40,13 +40,19 @@ export const EyeDropper: FC<PropsWithChildren<EyeDropperProps>> = (props) => {
     return () => document.removeEventListener("keydown", exitPickingByEsc);
   }, [pickingFromDocument, exitPickingByEsc]);
 
-  const onPickStart = useCallback(async () => {
-    const { sRGBHex } = await eyeDropper.open({ signal: abortSignal });
-    const color: Color = {
-      hex: sRGBHex,
-    };
-    onPick(color);
-  }, [eyeDropper, abortSignal, onPick]);
+  const onPickStart = useCallback(() => {
+    eyeDropper
+      .open({ signal: abortSignal })
+      .then(({ sRGBHex }) => {
+          const color: Color = {
+              hex: sRGBHex,
+          };
+          onPick(color);
+      })
+      .catch(() => {
+          onPickCancel();
+      });
+  }, [eyeDropper, abortSignal, onPick, onPickCancel]);
 
   useEffect(() => {
     on && onPickStart();
